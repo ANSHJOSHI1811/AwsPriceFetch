@@ -5,37 +5,55 @@ import (
 type RegionState struct {
     RegionName string `json:"region_name"`
     State      string `json:"state"`
+	CreatedAt     time.Time `gorm:"default:CURRENT_TIMESTAMP"`
+	ModifiedAt    time.Time `gorm:"default:CURRENT_TIMESTAMP"`
+	DisableFlag   bool      `gorm:"default:false"`
 }
 type Provider struct {
 	ProviderID   uint   `gorm:"primaryKey"`
 	ProviderName string `gorm:"unique"`
+	CreatedAt     time.Time `gorm:"default:CURRENT_TIMESTAMP"`
+	ModifiedAt    time.Time `gorm:"default:CURRENT_TIMESTAMP"`
+	DisableFlag   bool      `gorm:"default:false"`
 }
 
 type Service struct {
 	ServiceID   uint   `gorm:"primaryKey"`
 	ServiceName string
 	ProviderID  uint `gorm:"not null;constraint:OnDelete:CASCADE;"` // Foreign key with cascade delete
+	CreatedAt     time.Time `gorm:"default:CURRENT_TIMESTAMP"`
+	ModifiedAt    time.Time `gorm:"default:CURRENT_TIMESTAMP"`
+	DisableFlag   bool      `gorm:"default:false"`
 }
 
 type Region struct {
 	RegionID   uint   `gorm:"primaryKey"`
 	RegionCode string `gorm:"unique"`
+	ProviderID uint   `gorm:"not null;constraint:OnDelete:CASCADE;"` // Foreign key with cascade delete
 	ServiceID  uint   `gorm:"not null;constraint:OnDelete:CASCADE;"` // Foreign key with cascade delete
+	CreatedAt     time.Time `gorm:"default:CURRENT_TIMESTAMP"`
+	ModifiedAt    time.Time `gorm:"default:CURRENT_TIMESTAMP"`
+	DisableFlag   bool      `gorm:"default:false"`
 }
 
 type SKU struct {
 	ID              uint   `gorm:"primaryKey"`
+	RegionID        uint `gorm:"not null;constraint:OnDelete:CASCADE;"` // Foreign key with cascade delete
 	SKUCode         string `gorm:"unique"`
+	Name            string
+	InstanceSKU     string
 	ProductFamily   string
 	VCPU            int
-	OperatingSystem string
+	CpuArchitecture  string
 	InstanceType    string
 	Storage         string
 	Network         string
-	InstanceSKU     string
-	Processor       string
-	UsageType       string
-	RegionID        uint `gorm:"not null;constraint:OnDelete:CASCADE;"` // Foreign key with cascade delete
+	OperatingSystem string
+	Type 		string 
+	Memory          string
+	CreatedAt     time.Time `gorm:"default:CURRENT_TIMESTAMP"`
+	ModifiedAt    time.Time `gorm:"default:CURRENT_TIMESTAMP"`
+	DisableFlag   bool      `gorm:"default:false"`
 }
 
 type Price struct {

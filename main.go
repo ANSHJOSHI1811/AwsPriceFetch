@@ -115,6 +115,7 @@ func main() {
 			regionEntry := models.Region{
 				RegionCode: region.RegionCode,
 				ServiceID:  service.ServiceID,
+				ProviderID: service.ProviderID,
 			}
 			db.FirstOrCreate(&regionEntry, models.Region{RegionCode: region.RegionCode})
 	

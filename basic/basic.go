@@ -52,16 +52,17 @@ func processProducts(db *gorm.DB, products []models.Product, regionID uint) {
 		// Create SKU record
 		sku := models.SKU{
 			SKUCode:         product.SKU,
+			RegionID:        regionID,
+			InstanceSKU:     product.Attributes["instancesku"],
 			ProductFamily:   product.ProductFamily,
 			VCPU:            vcpu,
+			Type:       product.Attributes["usagetype"],
 			OperatingSystem: product.Attributes["operatingSystem"],
 			InstanceType:    product.Attributes["instanceType"],
 			Storage:         product.Attributes["storage"],
 			Network:         product.Attributes["networkPerformance"],
-			InstanceSKU:     product.Attributes["instancesku"],
-			Processor:       product.Attributes["physicalProcessor"],
-			UsageType:       product.Attributes["usagetype"],
-			RegionID:        regionID,
+			CpuArchitecture: product.Attributes["processorArchitecture"],
+			Memory: 		product.Attributes["memory"],
 		}
 
 		// Insert SKU (check if it exists, create if not)

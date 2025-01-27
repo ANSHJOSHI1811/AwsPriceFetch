@@ -1,4 +1,7 @@
 {
-  "region_name": "ca-central-1",
-  "state": "processing"
+  "region_name": "us-east-1-bos-1",
+  "state": "processing",
+  "CreatedAt": "0001-01-01T00:00:00Z",
+  "ModifiedAt": "0001-01-01T00:00:00Z",
+  "DisableFlag": false
 }
